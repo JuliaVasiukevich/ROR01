@@ -8,6 +8,11 @@
 
 class Trainer
   MINUTE = 10
+  KEY_SWITCH_MODE = 'm'
+  KEY_ADD_MINUTE = '+1'
+  KEY_1_SPEED = '1'
+  KEY_2_SPEED = '2'
+  KEY_3_SPEED = '3'
 
   def initialize
     @mode = 'walking'
@@ -38,18 +43,18 @@ class Trainer
   def get_input
     loop do
       p "Your settings: mode #{@mode}, speed: #{@speed}"
-      p 'You can switch the button to run/walk(m), add 1 minute(+1) or toggle speed(1/2/3)'
+      p "You can switch the button to run/walk(#{KEY_SWITCH_MODE}), add 1 minute(#{KEY_ADD_MINUTE}) or toggle speed(#{KEY_1_SPEED}/#{KEY_2_SPEED}/#{KEY_3_SPEED})"
       get = gets.strip
-      if get == 'm'
+      if get == KEY_SWITCH_MODE
         if @time >= MINUTE
           @mode = @mode == 'walking' ? 'run' : 'walking'
           p "You swiched to #{@mode}"
         else
           p "You can't swiched! You must walking 1 minute!"
         end
-      elsif get == '+1'
+      elsif get == KEY_ADD_MINUTE
         @time += MINUTE
-      elsif get == '1' || get == '2' || get == '3'
+      elsif get == KEY_1_SPEED || get == KEY_2_SPEED || get == KEY_3_SPEED
         @speed = get.to_i
         p "You swiched to #{get} speed"
       else

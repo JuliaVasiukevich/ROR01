@@ -22,7 +22,7 @@ class Student < User
   def course
     time = Time.new
     course = time.year - @year
-    if (1...5).include?(course)
+    if (1..5).include?(course)
       p course
     else
       p 'Not a student'
@@ -32,6 +32,6 @@ class Student < User
   attr_accessor :year
 end
 
-alex = Student.new({name: 'Alex', surname: 'Green', year: 2022})
+alex = Student.new({name: 'Alex', surname: 'Green', year: 2018})
 alex.full_name
 alex.course

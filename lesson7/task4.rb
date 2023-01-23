@@ -23,22 +23,32 @@ class Cat < Mammal
 end
 
 class Dog < Mammal
-   def initialize
+   def initialize(color_hair = '')
+      @color_hair = color_hair
       super(4, true)
    end
 
    def saying
       puts 'gav'
    end
+
+   def show_color
+      puts @color_hair
+   end
 end
 
 class Horse < Mammal
-   def initialize
+   def initialize(color_hair = '')
+      @color_hair = color_hair
       super(4, true)
    end
 
    def saying
       puts 'igogo'
+   end
+
+   def show_color
+      puts @color_hair
    end
 end
 
@@ -53,13 +63,30 @@ class Elepfant < Mammal
 end
 
 class GermanStephield < Dog
+   def initialize
+      super('brown')
+   end
+
 end
 
 class LabladorRetrivier < Dog
+
+   def initialize
+      super('golden')
+   end
 end
 
 class Cludesdale < Horse
+   def initialize
+      super('brown')
+   end
 end
 
 class Palomino < Horse
+   def initialize
+      super('white')
+   end
 end
+
+g = GermanStephield.new
+g.show_color
