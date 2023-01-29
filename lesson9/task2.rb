@@ -15,6 +15,7 @@ module Vehicles
       @weight = weight
       @driver = driver
       @engine = engine
+      @moving = false
     end
 
     def start
@@ -44,8 +45,34 @@ module Vehicles
     end
 
     def to_s
-      print "Марка: #{@brand}. Класс: #{@car_class}. Вес: #{@weight}. Мотор #{@engine.manufacturer} #{@engine.power}. Водитель автомобиля: #{@driver.name}, опыт вождения: #{@driver.experience}"
+      puts "Марка: #{@brand}. Класс: #{@car_class}. Вес: #{@weight}. Мотор #{@engine.manufacturer} #{@engine.power}. Водитель автомобиля: #{@driver.name}, опыт вождения: #{@driver.experience}"
       super
+    end
+  end
+  class Lorry < Car
+
+    attr_reader :body_load_capacity
+    def initialize(brand, weight, driver, engine, body_load_capacity, car_class = 'грузовик')
+      @body_load_capacity = body_load_capacity
+      super(brand, car_class, weight, driver, engine)
+    end
+
+    def to_s
+      super
+      puts "Грузоподъемность: #{@body_load_capacity}."
+      puts
+    end
+  end
+
+  class SportCar < Car
+    def initialize(brand, weight, driver, engine, max_speed, car_class = 'спортивная машина')
+      @max_speed = max_speed
+      super(brand, car_class, weight, driver, engine)
+    end
+
+    def to_s
+      super
+      puts "Максимальная скорость: #{@max_speed}."
       puts
     end
   end
@@ -76,39 +103,6 @@ class Driver < Person
   end
 end
 
-class Lorry < Vehicles::Car
-  prepend Vehicles
-
-  attr_reader :body_load_capacity
-  def initialize(brand, weight, driver, engine, body_load_capacity, car_class = 'грузовик')
-    @body_load_capacity = body_load_capacity
-    super(brand, car_class, weight, driver, engine)
-  end
-
-  def to_s
-    super
-    print "Грузоподъемность: #{@body_load_capacity}."
-    puts
-    puts
-  end
-end
-
-class SportCar < Vehicles::Car
-  prepend Vehicles
-
-  def initialize(brand, weight, driver, engine, max_speed, car_class = 'спортивная машина')
-    @max_speed = max_speed
-    super(brand, car_class, weight, driver, engine)
-  end
-
-  def to_s
-    super
-    print "Максимальная скорость: #{@max_speed}."
-    puts
-    puts
-  end
-end
-
 alexey = Driver.new('Иванов Алексей Юрьевич', '5 лет')
 engine_bmv = Professions::Engine.new('106 л.с.', 'BMV')
 peugeot307 = Vehicles::Car.new('Peugeot', 'хэтчбэк', '3.5т', alexey, engine_bmv)
@@ -120,9 +114,9 @@ peugeot307.turnRight
 peugeot307.stop
 peugeot307.to_s
 
-gazel = Lorry.new('Gazel', '8т', alexey, engine_bmv, '25т')
+gazel = Vehicles::Lorry.new('Gazel', '8т', alexey, engine_bmv, '25т')
 gazel.start
 gazel.to_s
 
-mazda = SportCar.new('Mazda', '1.5т', alexey, engine_bmv, '280км/ч')
+mazda = Vehicles::SportCar.new('Mazda', '1.5т', alexey, engine_bmv, '280км/ч')
 mazda.to_s

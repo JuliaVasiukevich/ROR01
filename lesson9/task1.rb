@@ -64,9 +64,9 @@ butter = Product.new('President', 8.93, 3.35)
 grocery = Category.new('grocery', [tea, coffee])
 dairy = Category.new('dairy', [milk, butter])
 
-alex = User.new('alex', '12345Aa', [tea, tea, milk])
-oleg = User.new('oleg', 'qwerty123', [tea, coffee, butter])
-vova = User.new('vova', '124587', [tea, butter, milk, milk, tea])
+alex = User.new('alex', '12345Aa', [tea, milk])
+oleg = User.new('oleg', 'qwerty123', [coffee])
+vova = User.new('vova', '124587', [butter])
 
 [grocery, dairy].map(&:show_all_category)
 [alex, oleg, vova].map(&:show_basket)
