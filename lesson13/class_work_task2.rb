@@ -1,5 +1,5 @@
-module AttrReader
-  def attr_reader(*attributes)
+module AttrReaderCustom
+  def attr_reader_custom(*attributes)
     attributes.each do |attribute|
       define_method(attribute) do
         p 'bla-bla'
@@ -10,9 +10,9 @@ module AttrReader
 end
 
 class ExampleClass
-  extend AttrReader
+  extend AttrReaderCustom
 
-  attr_reader :attribute1, :attribute2
+  attr_reader_custom :attribute1, :attribute2
 
   def initialize(attribute1, attribute2)
     @attribute1 = attribute1
@@ -20,4 +20,5 @@ class ExampleClass
   end
 end
 
-a = ExampleClass.new(:a, :b)
+a = ExampleClass.new('18', '13')
+a.attribute1
