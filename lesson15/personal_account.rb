@@ -1,17 +1,34 @@
 require_relative 'user'
 require_relative 'wallet'
+require_relative 'ticket'
 class PersonalAccount
   attr_reader :user, :wallet
-  def initialize(id, login, password)
-    @user = User.new(id, login, password)
-    @wallet = Wallet.new(id)
-    @tickets = nil
+  def initialize
+    @user = nil
+    @wallet = nil
+    @tickets = []
   end
 
   def show_personal_information
     p "Hi, #{@user.name}"
     p "Your ammount is #{@wallet.balance}$"
-    p "Your tickets are "
+    print "Your tickets are "
+    p self.show_personal_tickets.empty? ? 'empty': self.show_personal_tickets
+  end
+
+  def show_personal_tickets
+    file = File.open("tickets.txt")
+    file.each_line do |line|
+      id, ticket = line.strip.split(";")
+      @tickets << ticket if id == @user.id
+    end
+
+    @tickets
+  end
+
+  def setUser(user)
+    @user = user
+    @wallet = Wallet.new(@user.id)
   end
 
 end

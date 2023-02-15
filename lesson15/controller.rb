@@ -11,7 +11,7 @@ class Controller
   def initialize
     @auth = Autorizate.new
     @cinema_engine = CinemaEngine.new
-    @personal_account = nil
+    @personal_account = PersonalAccount.new
   end
 
   def run
@@ -27,12 +27,14 @@ class Controller
     case action
     when SIGN_IN
       @auth.sign_in
+
     when SIGN_UP
       @auth.sign_up
     else
       self.run
     end
-    @personal_account = @auth.current_user
+    @personal_account.setUser(@auth.current_user)
+    @cinema_engine.setUser(@auth.current_user.id)
   end
 
   def choise
@@ -42,9 +44,11 @@ class Controller
     when PERSONAL_ACCOUNT
       @personal_account.show_personal_information
     when REPLENISH_THE_BALANCE
-      @personal_account.wallet.replenish_the_balance
+      @personal_account.wallet.replenish_balance
     when TICKETS
-      @cinema_engine.buy_new_ticket_menu_1
+      chosen_ticket = @cinema_engine.buy_new_ticket
+      p chosen_ticket.seanse[:price]
+      @personal_account.wallet.change_balance('minus', chosen_ticket.seanse[:price])
     end
   end
 

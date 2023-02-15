@@ -26,7 +26,7 @@ class Autorizate
     password = gets.chomp
 
     raise 'Password is wrong.' if user_from_DB[:password] != password
-    @current_user = PersonalAccount.new(user_from_DB[:id], user_from_DB[:name], user_from_DB[:password])
+    @current_user = User.new(user_from_DB[:id], user_from_DB[:name])
     @autorizate = true
     puts 'Login successful!'
 
@@ -52,7 +52,7 @@ class Autorizate
     File.open("users.txt", "a") do |file|
       file.puts "#{id},#{username},#{password}"
     end
-    @current_user = PersonalAccount.new(id, username, password)
+    @current_user = User.new(id, username)
     @autorizate = true
     puts 'Login successful!'
 
