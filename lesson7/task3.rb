@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 # 1) Спортивный тренажёр
 # Тренажёр представляет собой снаряд для бега или ходьбы со звуковым сопровождением шагов. Имеется 2 кнопки управления: кнопка «время +1 мин», «режим бег/ходьба» и переключатель скорости 1-2-3. Кнопка «время +1 мин» включает тактовый генератор на 1 минуту или добавляет 1 мин, если он был уже включен. В режиме шагов генератор выдаёт импульсы с частотой 60 шагов в минуту не зависимо от показания тумблера скорости. В режиме «бег» генератор создаёт импульсы с частотой:
 #                                                                                                                                                                                                                                                                                                                                                                                                                                                                             – 120 шагов в минуту на 1 скорости;
 # – 180 шагов в минуту на 2 скорости;
 # – 240 шагов в минуту на 3 скорости.
 #   При этом во время бега тумблер скорости можно переключать только после 1 минуты бега. Начальная конфигурация: «ходьба» , 1-я скорость.
-
 
 class Trainer
   MINUTE = 10
@@ -22,8 +23,8 @@ class Trainer
   end
 
   def start_threads
-    t1 = Thread.new{add_minute}
-    t2 = Thread.new{get_input}
+    t1 = Thread.new { add_minute }
+    t2 = Thread.new { get_input }
     t1.join
     t2.join
   end
@@ -31,7 +32,7 @@ class Trainer
   def add_minute
     steps = 0
     loop do
-      while @run_time < @time do
+      while @run_time < @time
         steps += 1
         p "top #{steps}"
         sleep(step_time)
@@ -43,7 +44,8 @@ class Trainer
   def get_input
     loop do
       p "Your settings: mode #{@mode}, speed: #{@speed}"
-      p "You can switch the button to run/walk(#{KEY_SWITCH_MODE}), add 1 minute(#{KEY_ADD_MINUTE}) or toggle speed(#{KEY_1_SPEED}/#{KEY_2_SPEED}/#{KEY_3_SPEED})"
+      p "You can switch the button to run/walk(#{KEY_SWITCH_MODE})," \
+         "add 1 minute(#{KEY_ADD_MINUTE}) or toggle speed(#{KEY_1_SPEED}/#{KEY_2_SPEED}/#{KEY_3_SPEED})"
       get = gets.strip
       if get == KEY_SWITCH_MODE
         if @time >= MINUTE
@@ -54,7 +56,7 @@ class Trainer
         end
       elsif get == KEY_ADD_MINUTE
         @time += MINUTE
-      elsif get == KEY_1_SPEED || get == KEY_2_SPEED || get == KEY_3_SPEED
+      elsif [KEY_1_SPEED, KEY_2_SPEED, KEY_3_SPEED].include?(get)
         @speed = get.to_i
         p "You swiched to #{get} speed"
       else

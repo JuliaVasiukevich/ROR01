@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 def input_name(try)
-  puts 'Неверно!' if try > 0
+  puts 'Неверно!' if try.positive?
   puts 'Введите Ваше имя:'
   gets.strip.capitalize
 end
 
 def input_growth(try)
-  puts 'Неверно!' if try > 0
+  puts 'Неверно!' if try.positive?
   puts 'Введите ваш рост:'
   gets.strip.to_f
 end
@@ -28,7 +30,7 @@ end
 
 user_weight = (user_growth - 110) * 1.15
 
-if user_weight > 0
+if user_weight.positive?
   puts "#{user_name}, Ваш идеальный вес #{user_weight}"
 else
   puts 'Ваш вес уже оптимальный'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def correct_data(parameter)
   p "Введите корректное значение для #{parameter[:title]}"
   parameter[:value] = gets.strip.to_f

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # Взять задание с темы ООП и переписать методы с использованием блоков, Proc и lambda
 
-show_details = Proc.new{|products| products.map(&:show_details)}
+show_details = proc { |products| products.map(&:show_details) }
 
 class Product
   attr_reader :rating, :price, :name

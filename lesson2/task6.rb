@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 colors = {
   red: { title: 'красный',
          keyboard_value: 'к',
@@ -30,7 +32,7 @@ def make_bet(user_account)
   p 'Сделайте ставку в монетах!(Пишите только число, иначе ставка превратиться в тыкву!)'
   user_account[:bet] = gets.strip.to_i
 
-  if user_account[:account] - user_account[:bet] < 0
+  if (user_account[:account] - user_account[:bet]).negative?
     p 'На вашем счету недостаточно монет!'
     make_bet(user_account)
   else

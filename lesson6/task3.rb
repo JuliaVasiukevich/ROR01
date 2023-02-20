@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Взять несколько предметов, которые вас окружают, и описать их, как классы. Создать по объекту каждого класса, сравнить их поведение.
 
 class TV
@@ -19,18 +21,20 @@ class TV
 
   def add_channel(channel)
     return status unless @turn_on
-    unless @channels_set.include? (channel)
+
+    if @channels_set.include? channel
+      p "TV channel #{channel} exist!"
+    else
       @channels_set.push(channel)
       p "TV channel #{channel} added!"
-    else
-      p "TV channel #{channel} exist!"
     end
     status
   end
 
   def delete_channel(channel)
     return status unless @turn_on
-    if @channels_set.include? (channel)
+
+    if @channels_set.include? channel
       @channels_set.delete(channel)
       p "TV channel #{channel} deleted!"
     else
@@ -47,6 +51,7 @@ class Microwave
 
   def new_temperature_of_product(temperature, time_of_work)
     return 'Turn on your microwave!' unless @turn_on
+
     new_temperature = temperature + time_of_work / 2
     p "New temperature is #{new_temperature}"
   end
@@ -62,7 +67,7 @@ class Microwave
   end
 end
 
-tv = TV.new(true, ['national', 'belarus1', 'history'])
+tv = TV.new(true, %w[national belarus1 history])
 tv.turn_off_or_on
 tv.add_channel('national')
 tv.add_channel('discovery')
@@ -73,9 +78,8 @@ tv.add_channel('national')
 tv.add_channel('discovery')
 tv.delete_channel('discovery')
 tv.delete_channel('discovery')
-
 
 micro = Microwave.new(false)
-micro.new_temperature_of_product(10,12)
+micro.new_temperature_of_product(10, 12)
 micro.turn_off_or_on
-micro.new_temperature_of_product(10,12)
+micro.new_temperature_of_product(10, 12)

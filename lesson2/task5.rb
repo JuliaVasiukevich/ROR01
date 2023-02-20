@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def put_coefficient(coefficient, coefficients)
   key = coefficient[0]
   while coefficients[key].nil?
@@ -21,13 +23,13 @@ end
 
 d = coefficients[:b]**2 - 4 * coefficients[:a] * coefficients[:c]
 
-if d < 0
+if d.positive?
   p "D = #{d}."
   p 'Корней нет.'
-elsif d == 0 && coefficients[:a] != 0
+elsif d.zero? && coefficients[:a] != 0
   p "D = #{d}."
   p "x = #{- coefficients[:b] / (2 * coefficients[:a])}."
-elsif d > 0 && coefficients[:a] != 0
+elsif d.positive? && coefficients[:a] != 0
   p "D = #{d}."
   p "x1 = #{(- coefficients[:b] + Math.sqrt(d)) / (2 * coefficients[:a])}."
   p "x2 = #{(- coefficients[:b] - Math.sqrt(d)) / (2 * coefficients[:a])}."
