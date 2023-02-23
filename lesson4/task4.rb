@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Заполнить массив числами фибоначчи до 100
 
 MAX = 100

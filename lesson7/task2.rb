@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Реализуйте иерархию классов Figure, Circle, Square, Rectangle, Triangle с методами area() и perimeter(), которые возвращают площадь и периметр фигуры. Используйте полиморфизм. 
 
 class Figure
@@ -30,7 +32,7 @@ class Square < Figure
   end
 
   def area
-    p @side ** 2
+    p @side**2
   end
 
   def perimeter
@@ -45,7 +47,9 @@ class Triangle < Figure
 
   def area
     half_perimeter = perimeter / 2.0
-    p Math.sqrt(half_perimeter * (half_perimeter - @sides[0]) * (half_perimeter - @sides[1]) * (half_perimeter - @sides[2]))
+    p Math.sqrt(
+      half_perimeter * (half_perimeter - @sides[0]) * (half_perimeter - @sides[1]) * (half_perimeter - @sides[2])
+    )
   end
 
   def perimeter
@@ -59,7 +63,7 @@ class Circle < Figure
   end
 
   def area
-    p Math::PI * (@radius ** 2)
+    p Math::PI * (@radius**2)
   end
 
   def perimeter
@@ -67,7 +71,7 @@ class Circle < Figure
   end
 end
 
-rectangle = Rectangle.new(2,3)
+rectangle = Rectangle.new(2, 3)
 rectangle.area
 rectangle.perimeter
 
@@ -75,7 +79,7 @@ square = Square.new(3)
 square.area
 square.perimeter
 
-triangle = Triangle.new(3,4,5)
+triangle = Triangle.new(3, 4, 5)
 triangle.area
 triangle.perimeter
 
