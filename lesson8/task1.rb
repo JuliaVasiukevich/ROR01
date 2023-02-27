@@ -30,27 +30,32 @@ class Animal
   def sleep
     p "#{self.class} sleep in the #{self.location}"
   end
+
+  def properties
+    p "love dogs: #{@love_dogs}, love cats: #{@love_cats}, love_human: #{@love_human}"
+  end
 end
 
 class Cat < Animal
 
   def initialize(food, location)
-    love_dogs = false
-    love_cats = false
-    love_human = false
+    @love_dogs = false
+    @love_cats = false
+    @love_human = false
     super
   end
 
   def makeNoise
     p "#{self.class} make meaw"
   end
+
 end
 
 class Dog < Animal
   def initialize(food, location)
-    love_dogs = true
-    love_cats = false
-    love_human = true
+    @love_dogs = true
+    @love_cats = false
+    @love_human = true
     super
   end
 
@@ -61,9 +66,9 @@ end
 
 class Horse < Animal
   def initialize(food, location)
-    love_dogs = true
-    love_cats = true
-    love_human = true
+    @love_dogs = true
+    @love_cats = true
+    @love_human = true
     super
   end
 
@@ -92,6 +97,7 @@ c = Horse.new('carrot', 'stable')
 c.show_count
 c.makeNoise
 c.eat
+c.properties
 
 v = Vet.new
 v.treatAnimal(d)
