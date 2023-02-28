@@ -1,0 +1,1 @@
+{:time=>"19:00", :hall=>"1", :film=>{:title=>"Titanic", :genre=>"drama", :timing=>"2h 24min"}, :count=>1}
