@@ -22,13 +22,23 @@ class JokesGenerator
       @categories.map.with_index do |element, index|
         p "#{index + 1}: #{element}"
       end
+
+      chose_category
     end
 
-    def joke_request(number_of_category)
+    def chose_category
+      p 'Chose number of category'
+      number_of_category = gets.strip.to_i - 1
+
       raise StandardError 'Unknown value!' unless (1..@categories.size).include? number_of_category
 
       chosen_category = @categories[number_of_category]
       p "Your category is #{chosen_category}"
+
+      joke_request(chosen_category)
+    end
+
+    def joke_request(chosen_category)
       joke_request = Curl.get(HOST + JOKE_BY_CATEGORY + chosen_category)
       p JSON.parse(joke_request.body)['value']
     end
@@ -37,11 +47,6 @@ end
 
 loop do
   JokesGenerator.category_request
-
-  p 'Chose number of category'
-  number_of_category = gets.strip.to_i - 1
-
-  JokesGenerator.joke_request(number_of_category)
 
   p 'press any button to continue...'
   gets
